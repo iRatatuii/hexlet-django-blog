@@ -1,10 +1,10 @@
-from django.http import HttpResponse
-from django.shortcuts import render
-from django.views import View
+from django.shortcuts import redirect, render
 
-# def index(request):
-#     return render(request, 'articles/index.html')
+def index(request):
+    return redirect("article", tags='Python', article_id=42)
 
-class IndexView(View):
-    def get(self, request, *args, **kwargs):
-        return render(request, "articles/index.html")
+
+def article(request, tags, article_id):
+    return render(
+        request, "articles/articles.html", {"tags": tags, "article_id": article_id}
+    )
