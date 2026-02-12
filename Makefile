@@ -9,3 +9,9 @@ migrate:
 
 shell:
 	uv run manage.py shell
+
+create-superuser:
+	uv run manage.py createsuperuser
+
+dump:
+	uv run manage.py dumpdata > dump.json
