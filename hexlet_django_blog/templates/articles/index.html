@@ -3,5 +3,9 @@
 {% block title %}Эксперименты с Django на Хекслете{% endblock %}
 
 {% block content %}
-    <h1>Hello from articles!</h1>
+    <h1>Список статей</h1>
+    {% for article in articles %}
+        <a href='{% url 'article' article.id %}'>{{ article.name }}</a>
+        <p>{{ article.body|slice:":200" }}</p>
+    {% endfor %}
 {% endblock %}

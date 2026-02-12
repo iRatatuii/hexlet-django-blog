@@ -3,5 +3,6 @@
 {% block title %}Эксперименты с Django на Хекслете{% endblock %}
 
 {% block content %}
-    <h1>{{ tags }} - {{ article_id }}</h1>
+    <h2>ID: {{ article.id }} - Title: {{ article.name }}</h2>
+    <p>Body: {{ article.body|slice:":200" }}</p>
 {% endblock %}
