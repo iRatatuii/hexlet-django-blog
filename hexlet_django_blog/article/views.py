@@ -1,3 +1,4 @@
+from platform import architecture
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views import View
@@ -42,9 +43,31 @@ class ArticleFormCreateView(View):
     def post(self, request, *args, **kwargs):
         form = ArticleForm(request.POST)
         if form.is_valid():
-            article = form.save()
+            form.save()
             messages.success(request, 'Article add successfully')
             return redirect('articles')
         messages.error(request, "Article did not save")
 
         return render(request, "articles/create.html", {"form": form})
+
+
+class ArticleFormEditView(View):
+    def get(self, request, *args, **kwargs):
+        article_id = kwargs.get('id')
+        article = Article.objects.get(id=article_id)
+        form = ArticleForm(instance=article)
+        return render(request, 'articles/edit.html', {'form': form, 'article_id': article_id})
+
+    def post(self, request, *args, **kwargs):
+        article_id = kwargs.get('id')
+        article = Article.objects.get(id=article_id)
+        form = ArticleForm(request.POST, instance=article)        
+        
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Article updated successfully')
+            return redirect('articles')
+        else:
+            return render(
+                request, "articles/edit.html", {"form": form, "article_id": article_id}
+            )

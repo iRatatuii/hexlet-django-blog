@@ -5,4 +5,6 @@
 {% block content %}
     <h2>ID: {{ article.id }} - Title: {{ article.name }}</h2>
     <p>Body: {{ article.body|slice:":200" }}</p>
+    <a href="{% url 'edit_article' id=article.id %}">Редактировать</a>
+
 {% endblock %}
