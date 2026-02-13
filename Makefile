@@ -15,3 +15,6 @@ create-superuser:
 
 dump:
 	uv run manage.py dumpdata > dump.json
+
+lint:
+	uv run ruff check --fix
