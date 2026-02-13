@@ -1,6 +1,3 @@
-from email.policy import default
-from importlib.metadata import requires
-from random import choices
 from django.db import models
 
 
@@ -16,30 +13,3 @@ class Article(models.Model):
 class ArticleComment(models.Model):
     content = models.CharField("content", max_length=100)
 
-
-from django.http import Http404
-from django.shortcuts import render
-from django.views.decorators.http import require_http_methods
-from .models import Article
-
-
-@require_http_methods(["GET", "POST"])
-def index(request):
-    articles = Article.objects.all()
-    # BEGIN (write your solution here)
-    if request.method == "GET":
-        return render(request, "articles/index.html", context={"articles": articles})
-    else:
-        Article.objects.create(
-            title=request.POST.get("title"), author=request.POST.get("author")
-        )
-        # END
-        return render(request, "articles/index.html", context={"articles": articles})
-
-
-@require_http_methods(["GET"])
-def article_view(request, id):
-    # BEGIN (write your solution here)
-    article = Article.objects.get(id=id)
-    # END
-    return render(request, "articles/article.html", context={"article": article})

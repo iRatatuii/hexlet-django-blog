@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 from pathlib import Path
 
 import os
-import hexlet_django_blog
 from dotenv import load_dotenv
 
 load_dotenv()

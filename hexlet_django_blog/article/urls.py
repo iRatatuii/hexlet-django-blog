@@ -1,5 +1,4 @@
 from django.urls import path
-from django.views import View
 from hexlet_django_blog.article.views import (
     ArticleFormCreateView,
     IndexView,
