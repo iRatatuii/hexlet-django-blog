@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views import View
 from .forms import CommentArticleForm, ArticleForm
@@ -42,5 +43,8 @@ class ArticleFormCreateView(View):
         form = ArticleForm(request.POST)
         if form.is_valid():
             article = form.save()
+            messages.success(request, 'Article add successfully')
             return redirect('articles')
-        return render(request, 'articles/create.html', {'form': form})
+        messages.error(request, "Article did not save")
+
+        return render(request, "articles/create.html", {"form": form})
